@@ -7,6 +7,7 @@ dotenv.config()
 export async function register (req, res) {
     try {
         const { username, email, password } = req.body
+        const emailsAllowed = [email]
 
         // Check if email or user already exists:
         const existing = await User.findOne({ $or: [{ username }, { email }] })
@@ -14,7 +15,7 @@ export async function register (req, res) {
 
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10)
-        const user = new User({ username, email, hashedPassword })
+        const user = new User({ username, email, hashedPassword, emailsAllowed })
         await user.save()
         res.status(201).json({ message: 'OK' })
     } catch (err) {
