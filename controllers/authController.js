@@ -42,9 +42,21 @@ export async function login (req, res) {
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' })
 
-        await user.save()
-
-        res.json({ accessToken, refreshToken })
+         res
+            .cookie('accessToken', accessToken, {
+                httpOnly: true,
+                secure: true, // Asegúrate de que el servidor esté usando HTTPS
+                sameSite: 'None', // Para entornos con frontend en otro dominio
+                maxAge: 15 * 60 * 1000 // 15 minutos
+            })
+            .cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+                maxAge: 7 * 24 * 60 * 60 * 1000 // 7 días
+            })
+            .status(200)
+            .json({ message: 'Login exitoso' })
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Error en el servidor' })
