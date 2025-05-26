@@ -12,10 +12,9 @@ export async function register (req, res) {
         const existing = await User.findOne({ $or: [{ username }, { email }] })
         if (existing) return res.status(400).json({ message: 'Usuario o email ya en uso' })
 
-        // Hash password and generate UUID:
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10)
-        const uuid = crypto.randomUUID()
-        const user = new User({ username, email, hashedPassword, uuid })
+        const user = new User({ username, email, hashedPassword })
         await user.save()
         res.status(201).json({ message: 'OK' })
     } catch (err) {
@@ -38,7 +37,7 @@ export async function login (req, res) {
         if (!isMatch) return res.status(400).json({ message: 'Credenciales inválidas' })
 
         // Generate tokens:
-        const payload = { userId: user._id, uuid: user.uuid, email: user.email }
+        const payload = { userId: user._id, email: user.email, username: user.username }
         const accessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
         const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' })
 
@@ -67,8 +66,8 @@ export async function refreshToken (req, res) {
 
         const payload = {
             userId: user._id,
-            uuid: user.uuid,
-            email: user.email
+            email: user.email,
+            username: user.username
         }
 
         const newAccessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
