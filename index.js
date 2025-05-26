@@ -7,19 +7,23 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
 dotenv.config()
+
+const PORT = process.env.PORT
+
 const app = express()
+
 connectDB()
 
 app.use(express.json())
-app.disable('x-powered-by')
-const PORT = process.env.PORT
 
-app.use(cookieParser())
+app.disable('x-powered-by')
 
 app.use(cors({
   origin: `http://localhost:${PORT}`,
   credentials: true
 }))
+
+app.use(cookieParser())
 
 app.use('/api/auth', authRoutes)
 app.use('/api/email', emailRoutes)
