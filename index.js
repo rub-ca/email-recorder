@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
+import cors from 'cors'
 
 dotenv.config()
 const app = express()
@@ -13,8 +14,15 @@ app.disable('x-powered-by')
 
 const PORT = process.env.PORT
 
+app.use(cors({
+  origin: `http://localhost:${PORT}`,
+  credentials: true
+}))
+
 app.use('/api/auth', authRoutes)
 app.use('/api/email', emailRoutes)
+
+app.use(express.static('public'))
 
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Endpoint no encontrado' })
@@ -25,5 +33,5 @@ app.use((err, req, res, next) => {
 })
 
 app.listen(PORT, () => {
-    console.log(`Servidor en ejecución en puerto ${PORT}`)
+  console.log(`Servidor en ejecución en puerto ${PORT}`)
 })
