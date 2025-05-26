@@ -7,7 +7,6 @@ dotenv.config()
 
 export async function save (req, res) {
     try {
-        // Tenemos que mirar si existe el username al que va dirigido
         // Tenemos que mirar que ese usuario tenga habilitada la direccion de origen
         const { n8nKey, to, id, threadId, subject, from, compressed } = req.body
 
@@ -18,8 +17,14 @@ export async function save (req, res) {
         const username = to
         const user = await User.findOne({ username })
 
+        // Check is username exists:
         if (!user) {
             return res.status(400).json({ message: 'User not found' })
+        }
+
+        // Check if the email is allowed:
+        if (user.checkEmailsAllowed && !user.emailsAllowed.includes(from)) {
+            return res.status(403).json({ message: 'Email not allowed' })
         }
 
         const email = new Email({
