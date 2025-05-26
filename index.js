@@ -4,6 +4,7 @@ import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 dotenv.config()
 const app = express()
@@ -11,8 +12,9 @@ connectDB()
 
 app.use(express.json())
 app.disable('x-powered-by')
-
 const PORT = process.env.PORT
+
+app.use(cookieParser())
 
 app.use(cors({
   origin: `http://localhost:${PORT}`,

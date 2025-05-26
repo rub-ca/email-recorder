@@ -64,13 +64,14 @@ export async function login (req, res) {
 }
 
 export async function refreshToken (req, res) {
-    const { token } = req.body
+    const token = req.cookies?.refreshToken
+
     if (!token) {
         return res.status(401).json({ message: 'Refresh token requerido' })
     }
+
     try {
         const payloadRefresh = jwt.verify(token, process.env.JWT_REFRESH_SECRET)
-        console.log('Payload Refresh:', payloadRefresh)
         const user = await User.findById(payloadRefresh.userId)
 
         if (!user) {
@@ -84,7 +85,16 @@ export async function refreshToken (req, res) {
         }
 
         const newAccessToken = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
-        res.json({ accessToken: newAccessToken })
+
+        res
+            .cookie('accessToken', newAccessToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None',
+                maxAge: 15 * 60 * 1000 // 15 minutos
+            })
+            .status(200)
+            .json({ message: 'Token renovado' })
     } catch (err) {
         console.error(err)
         res.status(401).json({ message: 'Refresh token no válido o expirado' })
