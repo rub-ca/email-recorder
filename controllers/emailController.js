@@ -27,6 +27,12 @@ export async function save (req, res) {
             return res.status(403).json({ message: 'Email not allowed' })
         }
 
+        // Check if there is an email with the same id:
+        const existingEmail = await Email.findOne({ id })
+        if (existingEmail) {
+            return res.status(400).json({ message: 'Email with this ID already exists' })
+        }
+
         const email = new Email({
             to,
             id,

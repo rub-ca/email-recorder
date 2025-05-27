@@ -1,0 +1,71 @@
+@import url("colors.css");
+
+body {
+    background-color: var(--color-main-bg);
+    font-family: Arial, sans-serif;
+    color: var(--color-text);
+    margin: 0;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+#register-screen,
+#login-screen {
+    background-color: var(--color-chat-input-bg);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border);
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-top: 0;
+    color: var(--color-text);
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    background-color: var(--color-textarea-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+button {
+    background-color: var(--color-send-btn);
+    color: var(--color-text);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--color-send-btn-hover);
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}

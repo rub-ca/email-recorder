@@ -1,14 +1,4 @@
-/* Variables de color */
-:root {
-  --color-sidebar-bg: #1e1e2f;
-  --color-main-bg: #2a2a3a;
-  --color-chat-input-bg: #1c1c2b;
-  --color-textarea-bg: #2f2f40;
-  --color-border: #444;
-  --color-text: white;
-  --color-send-btn: #4a90e2;
-  --color-send-btn-hover: #357abd;
-}
+@import url("colors.css");
 
 /* Reset básico */
 * {
