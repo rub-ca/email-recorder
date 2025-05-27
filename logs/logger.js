@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 const logPath = path.resolve('logs/requests.log')
-// logger.js
+
 export function logger (req, res, next) {
   const now = new Date()
   let info = '--------------------------------- REQUEST INFO ---------------------------------\n'
