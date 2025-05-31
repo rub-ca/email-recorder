@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log('Respuesta del servidor 2');
             console.log('Respuesta del servidor:', data.message)
+            console.log('Respuesta del servidor:', data.emails)
         })
         .catch(err => console.error('Error:', err))
 
