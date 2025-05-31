@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => {
             console.log('Respuesta del servidor 1');
+            console.log('Estado de la respuesta:', res.json());
             res.json()
         })
         .then(data => {
