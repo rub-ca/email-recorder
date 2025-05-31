@@ -64,7 +64,7 @@ export async function getAll (req, res) {
 
         const username = req.user.username
 
-        Email.findAll({ to: username })
+        Email.find({ to: username })
             .then(emails => {
                 if (emails.length === 0) {
                     return res.status(404).json({ message: 'No emails found' })
