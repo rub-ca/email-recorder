@@ -23,8 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
         method: 'GET',
         credentials: 'include' // 👈 NECESARIO para enviar cookies
     })
-        .then(res => res.json())
+        .then(res => {
+            console.log('Respuesta del servidor 1');
+            res.json()
+        })
         .then(data => {
+            console.log('Respuesta del servidor 2');
             console.log('Respuesta del servidor:', data)
         })
         .catch(err => console.error('Error:', err))
