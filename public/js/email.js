@@ -25,14 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
         credentials: 'include' // 👈 NECESARIO para enviar cookies
     })
         .then(res => {
-            console.log('Respuesta del servidor 1');
             return res.json()
         })
         .then(data => {
-            console.log('Respuesta del servidor 2');
-            console.log('Respuesta del servidor:', data.message)
-            console.log('Respuesta del servidor:', data.emails)
-
             EMAILS = data.emails || [];
             EMAILS.forEach(email => {
                 writeEmailDiv({
@@ -40,11 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     from: email.from,
                     compressed: email.compressed
                 });
-
-                console.log('Email:', email);
             });
         })
         .catch(err => console.error('Error:', err))
-
-
 });

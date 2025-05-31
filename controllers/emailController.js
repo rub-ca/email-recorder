@@ -75,7 +75,7 @@ export async function getAll (req, res) {
                 if (emails.length === 0) {
                     return res.status(404).json({ message: 'No emails found' })
                 }
-                res.status(200).json({ message: 'Emails retrieved successfully', emails })
+                res.status(200).json({ emails })
             })
             .catch(err => {
                 console.error('Error retrieving emails:', err)
