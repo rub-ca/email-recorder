@@ -1,4 +1,4 @@
-// import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 // import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 import Email from '../models/Email.js'
@@ -47,5 +47,22 @@ export async function save (req, res) {
     } catch (err) {
         console.error(err)
         res.status(500).json({ message: 'Error' })
+    }
+}
+
+export async function getAll (req, res) {
+    console.log('Getting all emails for user')
+    const token = req.cookies.accessToken
+
+    if (!token) {
+        return res.status(401).json({ message: 'No token provided' })
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        req.user = decoded
+        console.log('Decoded user:', req.user)
+    } catch (err) {
+        return res.status(403).json({ message: 'Token inválido o expirado' })
     }
 }

@@ -16,102 +16,54 @@ function writeEmailDiv(email) {
     chatList.appendChild(div);
 }
 
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
-writeEmailDiv(
-    {
-        subject: 'Bienvenido a nuestro servicio',
-        date: '2023-10-01T12:00:00Z',
-        from: ' qwed',
-        to: ' qwed',
-        snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-    }
-);
+// on document load
+document.addEventListener('DOMContentLoaded', () => {
+
+    fetch('https://recorder.fuelmates.com/api/email/all', {
+        method: 'GET',
+        credentials: 'include' // 👈 NECESARIO para enviar cookies
+    })
+        .then(res => res.json())
+        .then(data => {
+            console.log('Respuesta del servidor:', data)
+        })
+        .catch(err => console.error('Error:', err))
+
+
+    writeEmailDiv(
+        {
+            subject: 'Bienvenido a nuestro servicio',
+            date: '2023-10-01T12:00:00Z',
+            from: ' qwed',
+            to: ' qwed',
+            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
+        }
+    );
+    writeEmailDiv(
+        {
+            subject: 'Bienvenido a nuestro servicio',
+            date: '2023-10-01T12:00:00Z',
+            from: ' qwed',
+            to: ' qwed',
+            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
+        }
+    );
+    writeEmailDiv(
+        {
+            subject: 'Bienvenido a nuestro servicio',
+            date: '2023-10-01T12:00:00Z',
+            from: ' qwed',
+            to: ' qwed',
+            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
+        }
+    );
+    writeEmailDiv(
+        {
+            subject: 'Bienvenido a nuestro servicio',
+            date: '2023-10-01T12:00:00Z',
+            from: ' qwed',
+            to: ' qwed',
+            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
+        }
+    );
+});
