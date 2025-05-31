@@ -25,12 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
         .then(res => {
             console.log('Respuesta del servidor 1');
-            console.log('Estado de la respuesta:', res.json());
             res.json()
         })
         .then(data => {
             console.log('Respuesta del servidor 2');
-            console.log('Respuesta del servidor:', data)
+            console.log('Respuesta del servidor:', data.message)
         })
         .catch(err => console.error('Error:', err))
 
