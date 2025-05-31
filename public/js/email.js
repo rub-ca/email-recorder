@@ -10,8 +10,25 @@ function writeEmailDiv(email) {
         </div>        
     `;
 
-    div.addEventListener('click', () => {
-        console.log('Compressed value:', email.compressed);
+    div.addEventListener('click', async () => {
+        try {
+            const response = await fetch('https://api.fuelmates.com/api/decompress', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: email.compressed
+            });
+
+            if (!response.ok) {
+                throw new Error('Fallo al descomprimir');
+            }
+
+            const decompressed = await response.text(); // Recibe texto plano descomprimido
+            console.log('Contenido descomprimido:', decompressed);
+        } catch (error) {
+            console.error('Error al descomprimir:', error);
+        }
     });
 
     chatList.appendChild(div);
