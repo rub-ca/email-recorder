@@ -6,10 +6,9 @@ function writeEmailDiv(email) {
     div.innerHTML = `
         <div class="chat-item-header">
             <span class="chat-item-title">${email.subject || 'Sin asunto'}</span>
-            <span class="chat-item-date">${new Date(email.date).toLocaleString()}</span>
         </div>
         <div class="chat-item-body">
-            <p>${email.from} &lt;${email.to}&gt;</p>
+            <p>${email.from} &lt;</p>
             <p>${email.compressed}</p>
         </div>
     `;
@@ -36,9 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             emails.forEach(email => {
                 writeEmailDiv({
                     subject: email.subject,
-                    date: 'email.date',
                     from: email.from,
-                    to: email.to,
                     compressed: email.compressed
                 });
             });
