@@ -8,8 +8,9 @@ function writeEmailDiv(email) {
             <span class="chat-item-title">${email.subject || 'Sin asunto'}</span>
         </div>
         <div class="chat-item-body">
-            <p>${email.from} &lt;</p>
+            <p>${email.from}</p>
             <p>${email.compressed}</p>
+            <p>----END------</p>
         </div>
     `;
     chatList.appendChild(div);
