@@ -62,6 +62,7 @@ export async function getAll (req, res) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.user = decoded
         console.log('Decoded user:', req.user)
+        res.status(200).json({ message: 'Token válido', user: req.user })
     } catch (err) {
         return res.status(403).json({ message: 'Token inválido o expirado' })
     }
