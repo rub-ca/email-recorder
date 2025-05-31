@@ -1,4 +1,5 @@
-// Write some div in chat list
+var EMAILS = [];
+
 function writeEmailDiv(email) {
     const chatList = document.getElementById('chat-list');
     const div = document.createElement('div');
@@ -32,13 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Respuesta del servidor:', data.message)
             console.log('Respuesta del servidor:', data.emails)
 
-            const emails = data.emails || [];
-            emails.forEach(email => {
+            EMAILS = data.emails || [];
+            EMAILS.forEach(email => {
                 writeEmailDiv({
                     subject: email.subject,
                     from: email.from,
                     compressed: email.compressed
                 });
+
+                console.log('Email:', email);
             });
         })
         .catch(err => console.error('Error:', err))
