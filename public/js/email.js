@@ -9,6 +9,11 @@ function writeEmailDiv(email) {
             <span class="chat-item-title">${email.subject || 'Sin asunto'}</span>
         </div>        
     `;
+
+    div.addEventListener('click', () => {
+        console.log('Compressed value:', email.compressed);
+    });
+
     chatList.appendChild(div);
 }
 
