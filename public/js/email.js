@@ -10,7 +10,7 @@ function writeEmailDiv(email) {
         </div>
         <div class="chat-item-body">
             <p>${email.from} &lt;${email.to}&gt;</p>
-            <p>${email.snippet}</p>
+            <p>${email.compressed}</p>
         </div>
     `;
     chatList.appendChild(div);
@@ -31,44 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Respuesta del servidor 2');
             console.log('Respuesta del servidor:', data.message)
             console.log('Respuesta del servidor:', data.emails)
+
+            const emails = data.emails || [];
+            emails.forEach(email => {
+                writeEmailDiv({
+                    subject: email.subject,
+                    date: 'email.date',
+                    from: email.from,
+                    to: email.to,
+                    compressed: email.compressed
+                });
+            });
         })
         .catch(err => console.error('Error:', err))
 
 
-    writeEmailDiv(
-        {
-            subject: 'Bienvenido a nuestro servicio',
-            date: '2023-10-01T12:00:00Z',
-            from: ' qwed',
-            to: ' qwed',
-            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-        }
-    );
-    writeEmailDiv(
-        {
-            subject: 'Bienvenido a nuestro servicio',
-            date: '2023-10-01T12:00:00Z',
-            from: ' qwed',
-            to: ' qwed',
-            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-        }
-    );
-    writeEmailDiv(
-        {
-            subject: 'Bienvenido a nuestro servicio',
-            date: '2023-10-01T12:00:00Z',
-            from: ' qwed',
-            to: ' qwed',
-            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-        }
-    );
-    writeEmailDiv(
-        {
-            subject: 'Bienvenido a nuestro servicio',
-            date: '2023-10-01T12:00:00Z',
-            from: ' qwed',
-            to: ' qwed',
-            snippet: 'Este es un mensaje de bienvenida a nuestro servicio. Esperamos que disfrutes de todas las funcionalidades que ofrecemos.'
-        }
-    );
 });
