@@ -61,8 +61,20 @@ export async function getAll (req, res) {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.user = decoded
-        console.log('Decoded user:', req.user)
-        res.status(200).json({ message: 'Token válido', user: req.user })
+
+        const username = req.user.username
+
+        Email.findAll({ to: username })
+            .then(emails => {
+                if (emails.length === 0) {
+                    return res.status(404).json({ message: 'No emails found' })
+                }
+                res.status(200).json({ message: 'Emails retrieved successfully', emails })
+            })
+            .catch(err => {
+                console.error('Error retrieving emails:', err)
+                res.status(500).json({ message: 'Error retrieving emails' })
+            })
     } catch (err) {
         return res.status(403).json({ message: 'Token inválido o expirado' })
     }
