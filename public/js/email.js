@@ -7,12 +7,7 @@ function writeEmailDiv(email) {
     div.innerHTML = `
         <div class="chat-item-header">
             <span class="chat-item-title">${email.subject || 'Sin asunto'}</span>
-        </div>
-        <div class="chat-item-body">
-            <p>${email.from}</p>
-            <p>${email.compressed}</p>
-            <p>----END------</p>
-        </div>
+        </div>        
     `;
     chatList.appendChild(div);
 }
