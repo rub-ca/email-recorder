@@ -57,6 +57,7 @@ body, html {
   background: none;
   color: initial;
   font: initial;
+  background-color: aliceblue;
 }
 
 /* Resetea los estilos de todos los elementos dentro de chat-content */
