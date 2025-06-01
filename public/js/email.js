@@ -40,7 +40,16 @@ function writeEmailDiv(email) {
 }
 
 // on document load
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const response = await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        })
+    } catch (err) {
+        console.log('Error: ' + err.message)
+    }
 
     fetch('https://recorder.fuelmates.com/api/email/all', {
         method: 'GET',
