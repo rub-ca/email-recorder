@@ -28,7 +28,7 @@ function writeEmailDiv(email) {
 
             const chatContent = document.getElementById('chat-content');
 
-            chatContent.innerHTML = `${decompressed}`;
+            chatContent.innerHTML = `${decompressed.compressed}`;
 
             console.log('Contenido descomprimido:', decompressed.compressed);
         } catch (error) {
