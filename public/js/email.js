@@ -25,7 +25,12 @@ function writeEmailDiv(email) {
             }
 
             const decompressed = await response.text(); // Recibe texto plano descomprimido
-            console.log('Contenido descomprimido:', decompressed);
+
+            const chatContent = document.getElementById('chat-content');
+
+            chatContent.innerHTML = `${decompressed}`;
+
+            console.log('Contenido descomprimido:', decompressed.compressed);
         } catch (error) {
             console.error('Error al descomprimir:', error);
         }
