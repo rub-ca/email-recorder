@@ -35,8 +35,12 @@ export async function save (req, res) {
 
         // Check if the threadId is already used:
         const existingThread = await Email.findOne({ threadId })
-        if (existingThread && compressed && existingThread.compressed && compressed.length <= existingThread.compressed.length) {
-            return res.status(400).json({ message: 'Compressed email is not longer than existing one' })
+        if (existingThread && compressed && existingThread.compressed) {
+            if (compressed.length <= existingThread.compressed.length) {
+                return res.status(400).json({ message: 'Compressed email is not longer than existing one' })
+            } else {
+                await Email.deleteOne({ threadId })
+            }
         }
 
         const email = new Email({
