@@ -30,7 +30,7 @@ function writeEmailDiv(email) {
 
             chatContent.innerHTML = `${decompressed.compressed}`;
 
-            console.log('Contenido descomprimido:', decompressed.compressed);
+            console.log('Contenido descomprimido:', decompressed);
         } catch (error) {
             console.error('Error al descomprimir:', error);
         }
