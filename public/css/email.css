@@ -49,12 +49,23 @@ body, html {
   color: var(--color-text);
 }
 
-/* Mensajes */
+/* ...existing code... */
 .chat-content {
   flex: 1;
-  padding: 20px;
+  padding: 0; /* Quita el padding */
   overflow-y: auto;
+  background: none;
+  color: initial;
+  font: initial;
 }
+
+/* Resetea los estilos de todos los elementos dentro de chat-content */
+.chat-content * {
+  all: unset;
+  display: revert;
+  box-sizing: border-box;
+}
+/* ...existing code... */
 
 /* Entrada del chat */
 .chat-input {
