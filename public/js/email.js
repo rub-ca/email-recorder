@@ -24,7 +24,7 @@ function writeEmailDiv(email) {
                 throw new Error('Fallo al descomprimir');
             }
 
-            const decompressed = await response.text(); // Recibe texto plano descomprimido
+            const decompressed = await response.json(); // Recibe texto plano descomprimido
 
             const chatContent = document.getElementById('chat-content');
 
