@@ -13,7 +13,17 @@ const openai = new OpenAI({
 const qdrantClient = new QdrantClient({
     url: process.env.QDRANT_URL,
     apiKey: process.env.QDRANT_API_KEY
-  })
+})
+
+try {
+    const result = await qdrantClient.getCollections()
+    console.log('- Conexión a Qdrant establecida. ✅')
+    console.log('       - List of collections:', result.collections)
+    console.log('\n')
+} catch (err) {
+    console.error('Could not get collections:', err)
+    process.exit(1)
+}
 
 export async function saveVectorEmail (cleaned, emailId, username) {
     const sentences = chunkText(cleaned)
