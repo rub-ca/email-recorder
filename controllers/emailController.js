@@ -7,7 +7,6 @@ dotenv.config()
 
 export async function save (req, res) {
     try {
-        // Tenemos que mirar que ese usuario tenga habilitada la direccion de origen
         const { n8nKey, to, id, threadId, subject, from, compressed } = req.body
 
         if (!n8nKey || n8nKey !== process.env.N8N_KEY) {
