@@ -48,21 +48,21 @@ async function embedChunk (text) {
 
 async function indexSentence (collectionName, sentence, embedding, emailId, username) {
     const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
-qdrantClient.getCollections()
-    // await qdrantClient.upsertPoints(collectionName, {
-    //     wait: true,
-    //     points: [
-    //         {
-    //             id: pointId,
-    //             vector: embedding,
-    //             payload: {
-    //                 emailId,
-    //                 username,
-    //                 text: sentence
-    //             }
-    //         }
-    //     ]
-    // })
+    console.dir(qdrantClient)
+    await qdrantClient.upsert(collectionName, {
+        wait: true,
+        points: [
+            {
+                id: pointId,
+                vector: embedding,
+                payload: {
+                    emailId,
+                    username,
+                    text: sentence
+                }
+            }
+        ]
+    })
     console.log(`Indexed sentence in Qdrant with ID ${pointId}.`)
 }
 

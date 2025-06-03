@@ -25,9 +25,9 @@ export async function connectVectorDB () {
     console.log('- Conexión a Qdrant establecida. ✅')
     console.log('       - List of collections:', result.collections)
     console.log('\n')
-    return qdrantClient
   } catch (err) {
     console.error('Could not get collections:', err)
     process.exit(1)
   }
+  return qdrantClient
 }
