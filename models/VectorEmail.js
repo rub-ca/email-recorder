@@ -61,7 +61,7 @@ async function embedChunk (text) {
 
 async function indexSentence (collectionName, sentence, embedding, emailId, username) {
     // const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
-    const pointId = Math.random().toString(36).slice(2, 11)
+    const pointId = Math.floor(Math.random() * 900000) + 1
 
     console.dir('\n')
     console.dir(qdrantClient)
