@@ -13,9 +13,8 @@ const openai = new OpenAI({
 const qdrantClient = connectVectorDB()
 
 export async function saveVectorEmail (cleaned) {
-    cleaned = cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned
-    // const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
-    const sentences = chunkText(cleaned)
+    const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
+    // const sentences = chunkText(cleaned)
     console.dir(sentences)
     // const embedding = await embedChunk(cleaned)
     // console.dir(embedding)
