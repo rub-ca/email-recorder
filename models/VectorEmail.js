@@ -13,6 +13,7 @@ const openai = new OpenAI({
 const qdrantClient = connectVectorDB()
 
 export async function saveVectorEmail (cleaned) {
+    cleaned = cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned
     const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
     // const sentences = chunkText(cleaned)
     console.dir(sentences)
@@ -45,26 +46,26 @@ async function embedChunk (text) {
 // }
 
 function chunkText (text) {
-  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text] // divide en oraciones
+    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text] // divide en oraciones
 
-  const chunks = []
-  let currentChunk = ''
-  let currentTokenCount = 0
+    const chunks = []
+    let currentChunk = ''
+    let currentTokenCount = 0
 
-  for (const sentence of sentences) {
-    const tokenCount = enc.encode(sentence).length
+    for (const sentence of sentences) {
+        const tokenCount = enc.encode(sentence).length
 
-    if (currentTokenCount + tokenCount > maxTokens) {
-      chunks.push(currentChunk.trim())
-      currentChunk = sentence
-      currentTokenCount = tokenCount
-    } else {
-      currentChunk += ' ' + sentence
-      currentTokenCount += tokenCount
+        if (currentTokenCount + tokenCount > maxTokens) {
+            chunks.push(currentChunk.trim())
+            currentChunk = sentence
+            currentTokenCount = tokenCount
+        } else {
+            currentChunk += ' ' + sentence
+            currentTokenCount += tokenCount
+        }
     }
-  }
 
-  if (currentChunk) chunks.push(currentChunk.trim())
+    if (currentChunk) chunks.push(currentChunk.trim())
 
-  return chunks
+    return chunks
 }
