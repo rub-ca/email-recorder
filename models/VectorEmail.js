@@ -13,9 +13,12 @@ const qdrantClient = connectVectorDB()
 
 export async function saveVectorEmail (cleaned) {
     const sentences = chunkText(cleaned)
-    console.dir(sentences)
-    // const embedding = await embedChunk(cleaned)
-    // console.dir(embedding)
+
+    for (const sentence of sentences) {
+        console.dir(sentence)
+        const embedding = await embedChunk(cleaned)
+        console.dir(embedding)
+    }
 }
 
 async function embedChunk (text) {
