@@ -1,8 +1,21 @@
 import OpenAI from 'openai'
+import { QdrantClient } from '@qdrant/js-client-rest'
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
+
+const qdrantClient = new QdrantClient({
+    url: 'https://32530dfa-5fc8-4640-ad91-f060b2cb3567.eu-central-1-0.aws.cloud.qdrant.io:6333',
+    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.Iol7ACthCfnnkduWB_Fu8AexJyiTL75kbDZ-Rd1azHw'
+})
+
+try {
+    const result = await qdrantClient.getCollections()
+    console.log('List of collections:', result.collections)
+} catch (err) {
+    console.error('Could not get collections:', err)
+}
 
 export async function saveVectorEmail (cleaned) {
     const embedding = await embedChunk(cleaned)
