@@ -47,11 +47,9 @@ async function embedChunk (text) {
 // }
 
 async function indexSentence (collectionName, sentence, embedding, emailId, username) {
-    // Construct a unique point ID (could be a UUID or combination of email/user and index)
     const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
 
-    // Upsert the point with vector and payload
-    await qdrantClient.upsert(collectionName, {
+    await qdrantClient.upsertPoints(collectionName, {
         wait: true,
         points: [
             {
