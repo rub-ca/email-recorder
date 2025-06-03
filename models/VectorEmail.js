@@ -6,8 +6,8 @@ const openai = new OpenAI({
 })
 
 const qdrantClient = new QdrantClient({
-    url: 'https://32530dfa-5fc8-4640-ad91-f060b2cb3567.eu-central-1-0.aws.cloud.qdrant.io:6333',
-    apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.Iol7ACthCfnnkduWB_Fu8AexJyiTL75kbDZ-Rd1azHw'
+    url: process.env.QDRANT_URL,
+    apiKey: process.env.QDRANT_API_KEY
 })
 
 try {
