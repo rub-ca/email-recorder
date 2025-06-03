@@ -11,13 +11,14 @@ const openai = new OpenAI({
 
 const qdrantClient = connectVectorDB()
 
-export async function saveVectorEmail (cleaned) {
+export async function saveVectorEmail (cleaned, emailId, username) {
     const sentences = chunkText(cleaned)
 
     for (const sentence of sentences) {
         console.dir(sentence)
         const embedding = await embedChunk(cleaned)
         console.dir(embedding)
+        indexSentence('emails', sentence, embedding, emailId, username)
     }
 }
 
@@ -44,6 +45,28 @@ async function embedChunk (text) {
 //     ]
 //   });
 // }
+
+async function indexSentence (collectionName, sentence, embedding, emailId, username) {
+    // Construct a unique point ID (could be a UUID or combination of email/user and index)
+    const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
+
+    // Upsert the point with vector and payload
+    await qdrantClient.upsert(collectionName, {
+        wait: true,
+        points: [
+            {
+                id: pointId,
+                vector: embedding,
+                payload: {
+                    emailId,
+                    username,
+                    text: sentence
+                }
+            }
+        ]
+    })
+    console.log(`Indexed sentence in Qdrant with ID ${pointId}.`)
+}
 
 function chunkText (text) {
     const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text]

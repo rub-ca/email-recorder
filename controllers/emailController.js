@@ -53,7 +53,7 @@ export async function save (req, res) {
         })
 
         await email.save()
-        await saveVectorEmail(cleaned)
+        await saveVectorEmail(cleaned, id, username)
         return res.status(201).json({ message: 'OK' })
     } catch (err) {
         console.error(err)
