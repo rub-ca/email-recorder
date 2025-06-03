@@ -1,6 +1,5 @@
 import OpenAI from 'openai'
 import { QdrantClient } from '@qdrant/js-client-rest'
-import { connectVectorDB } from '../config/db.js'
 import { encoding_for_model as encoding } from '@dqbd/tiktoken'
 
 const maxTokens = 800
