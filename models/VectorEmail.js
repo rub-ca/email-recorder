@@ -4,7 +4,7 @@ import tokenizer from 'sbd'
 import { encoding_for_model as encoding } from '@dqbd/tiktoken'
 
 const maxTokens = 800
-const enc = await encoding_for_model('text-embedding-3-small')
+const enc = await encoding('text-embedding-3-small')
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
