@@ -52,10 +52,10 @@ export async function save (req, res) {
         })
 
         await email.save()
-        res.status(201).json({ message: 'OK' })
+        return res.status(201).json({ message: 'OK' })
     } catch (err) {
         console.error(err)
-        res.status(500).json({ message: 'Error' })
+        return res.status(500).json({ message: 'Error' })
     }
 }
 
