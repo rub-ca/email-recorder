@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
-import vectorRoutes from './routes/vectorRoutes.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import { logger } from './logs/logger.js'
@@ -31,7 +30,6 @@ app.use(logger)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/email', emailRoutes)
-app.use('/api/vector', vectorRoutes)
 
 app.use(express.static('public'))
 
