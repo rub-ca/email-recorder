@@ -1,6 +1,7 @@
 import OpenAI from 'openai'
 import { QdrantClient } from '@qdrant/js-client-rest'
 import { encoding_for_model as encoding } from '@dqbd/tiktoken'
+import { v4 as uuidv4 } from 'uuid'
 
 const maxTokens = 800
 const enc = await encoding('text-embedding-3-small')
@@ -48,6 +49,7 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
         wait: true,
         points: [
             {
+                id: uuidv4(),
                 vector: embedding,
                 payload: {
                     emailId,
