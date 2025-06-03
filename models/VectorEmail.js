@@ -1,19 +1,16 @@
 import OpenAI from 'openai'
-import { QdrantClient } from '@qdrant/js-client-rest'
 import { connectVectorDB } from '../config/db.js'
+import tokenizer from 'sbd'
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-const qdrantClient = new QdrantClient({
-    url: process.env.QDRANT_URL,
-    apiKey: process.env.QDRANT_API_KEY
-})
-
-connectVectorDB(qdrantClient)
+const qdrantClient = connectVectorDB()
 
 export async function saveVectorEmail (cleaned) {
+    const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
+    console.log(sentences)
     const embedding = await embedChunk(cleaned)
     console.dir(embedding)
 }
