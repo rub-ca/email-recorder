@@ -1,6 +1,10 @@
 import OpenAI from 'openai'
 import { connectVectorDB } from '../config/db.js'
 import tokenizer from 'sbd'
+import { encoding_for_model as encoding } from '@dqbd/tiktoken'
+
+const maxTokens = 800
+const enc = await encoding_for_model('text-embedding-3-small')
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
@@ -9,7 +13,8 @@ const openai = new OpenAI({
 const qdrantClient = connectVectorDB()
 
 export async function saveVectorEmail (cleaned) {
-    const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
+    // const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
+    const sentences = chunkText(cleaned)
     console.log(sentences)
     const embedding = await embedChunk(cleaned)
     console.dir(embedding)
@@ -38,3 +43,28 @@ async function embedChunk (text) {
 //     ]
 //   });
 // }
+
+function chunkText (text) {
+  const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text] // divide en oraciones
+
+  const chunks = []
+  let currentChunk = ''
+  let currentTokenCount = 0
+
+  for (const sentence of sentences) {
+    const tokenCount = enc.encode(sentence).length
+
+    if (currentTokenCount + tokenCount > maxTokens) {
+      chunks.push(currentChunk.trim())
+      currentChunk = sentence
+      currentTokenCount = tokenCount
+    } else {
+      currentChunk += ' ' + sentence
+      currentTokenCount += tokenCount
+    }
+  }
+
+  if (currentChunk) chunks.push(currentChunk.trim())
+
+  return chunks
+}
