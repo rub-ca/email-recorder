@@ -53,8 +53,7 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
     console.dir(qdrantClient)
     console.dir('\n')
 
-    await qdrantClient.upsertPoints(collectionName, {
-        wait: true,
+    await qdrantClient.points.upsert(collectionName, {
         points: [
             {
                 id: pointId,
@@ -67,6 +66,21 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
             }
         ]
     })
+
+    // await qdrantClient.upsertPoints(collectionName, {
+    //     wait: true,
+    //     points: [
+    //         {
+    //             id: pointId,
+    //             vector: embedding,
+    //             payload: {
+    //                 emailId,
+    //                 username,
+    //                 text: sentence
+    //             }
+    //         }
+    //     ]
+    // })
     console.log(`Indexed sentence in Qdrant with ID ${pointId}.`)
 }
 
