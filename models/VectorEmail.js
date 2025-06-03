@@ -1,5 +1,6 @@
 import OpenAI from 'openai'
 import { QdrantClient } from '@qdrant/js-client-rest'
+import { connectVectorDB } from '../config/db.js'
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
@@ -10,12 +11,7 @@ const qdrantClient = new QdrantClient({
     apiKey: process.env.QDRANT_API_KEY
 })
 
-try {
-    const result = await qdrantClient.getCollections()
-    console.log('List of collections:', result.collections)
-} catch (err) {
-    console.error('Could not get collections:', err)
-}
+connectVectorDB(qdrantClient)
 
 export async function saveVectorEmail (cleaned) {
     const embedding = await embedChunk(cleaned)

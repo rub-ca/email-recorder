@@ -11,3 +11,12 @@ export async function connectDB () {
     process.exit(1)
   }
 }
+
+export async function connectVectorDB (qdrantClient) {
+  try {
+    const result = await qdrantClient.getCollections()
+    console.log('List of collections:', result.collections)
+  } catch (err) {
+    console.error('Could not get collections:', err)
+  }
+}
