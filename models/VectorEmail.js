@@ -48,8 +48,12 @@ async function embedChunk (text) {
 
 async function indexSentence (collectionName, sentence, embedding, emailId, username) {
     const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
+
+    console.dir('\n')
     console.dir(qdrantClient)
-    await qdrantClient.upsert(collectionName, {
+    console.dir('\n')
+
+    await qdrantClient.upsertPoints(collectionName, {
         wait: true,
         points: [
             {
