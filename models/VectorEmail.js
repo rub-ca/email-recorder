@@ -16,9 +16,9 @@ export async function saveVectorEmail (cleaned) {
     cleaned = cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned += cleaned
     // const sentences = tokenizer.sentences(cleaned, { newline_boundaries: false })
     const sentences = chunkText(cleaned)
-    console.log(sentences)
-    const embedding = await embedChunk(cleaned)
-    console.dir(embedding)
+    console.dir(sentences)
+    // const embedding = await embedChunk(cleaned)
+    // console.dir(embedding)
 }
 
 async function embedChunk (text) {
