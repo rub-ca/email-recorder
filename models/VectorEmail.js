@@ -43,8 +43,7 @@ async function embedChunk (text) {
 // }
 
 function chunkText (text) {
-    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text]
-    // const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text]
+    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text]
 
     const chunks = []
     let currentChunk = ''
