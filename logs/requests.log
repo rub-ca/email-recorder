@@ -1,0 +1,58 @@
+--------------------------------- REQUEST INFO ---------------------------------
+Tue Jun 03 2025 17:28:22 GMT+0200 (hora de verano de Europa central)
+Método: POST
+URL: /api/vector/save
+
+Headers: {
+  "content-type": "text/plain",
+  "user-agent": "PostmanRuntime/7.44.0",
+  "accept": "*/*",
+  "postman-token": "2fb64a8c-6995-4132-8499-69ad56c8eaa9",
+  "host": "localhost:3001",
+  "accept-encoding": "gzip, deflate, br",
+  "connection": "keep-alive",
+  "content-length": "5012"
+}
+
+Query: {}
+
+Params: {}
+
+Body: undefined
+
+Cookies: {}
+
+IP: ::1
+--------------------------------------------------------------------------------
+
+
+
+--------------------------------- REQUEST INFO ---------------------------------
+Tue Jun 03 2025 17:29:37 GMT+0200 (hora de verano de Europa central)
+Método: POST
+URL: /api/vector/save
+
+Headers: {
+  "content-type": "text/plain",
+  "user-agent": "PostmanRuntime/7.44.0",
+  "accept": "*/*",
+  "postman-token": "ecc25e1f-17cd-4848-836d-7497cad63ee3",
+  "host": "localhost:3001",
+  "accept-encoding": "gzip, deflate, br",
+  "connection": "keep-alive",
+  "content-length": "5012"
+}
+
+Query: {}
+
+Params: {}
+
+Body: undefined
+
+Cookies: {}
+
+IP: ::1
+--------------------------------------------------------------------------------
+
+
+
