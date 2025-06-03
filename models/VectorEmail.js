@@ -1,4 +1,5 @@
 import OpenAI from 'openai'
+import { QdrantClient } from '@qdrant/js-client-rest'
 import { connectVectorDB } from '../config/db.js'
 import { encoding_for_model as encoding } from '@dqbd/tiktoken'
 
@@ -9,7 +10,10 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-const qdrantClient = connectVectorDB()
+const qdrantClient = new QdrantClient({
+    url: process.env.QDRANT_URL,
+    apiKey: process.env.QDRANT_API_KEY
+  })
 
 export async function saveVectorEmail (cleaned, emailId, username) {
     const sentences = chunkText(cleaned)
@@ -53,7 +57,8 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
     console.dir(qdrantClient)
     console.dir('\n')
 
-    await qdrantClient.points.upsert(collectionName, {
+    await qdrantClient.upsert(collectionName, {
+        wait: true,
         points: [
             {
                 id: pointId,
@@ -66,21 +71,6 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
             }
         ]
     })
-
-    // await qdrantClient.upsertPoints(collectionName, {
-    //     wait: true,
-    //     points: [
-    //         {
-    //             id: pointId,
-    //             vector: embedding,
-    //             payload: {
-    //                 emailId,
-    //                 username,
-    //                 text: sentence
-    //             }
-    //         }
-    //     ]
-    // })
     console.log(`Indexed sentence in Qdrant with ID ${pointId}.`)
 }
 
