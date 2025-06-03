@@ -43,35 +43,11 @@ async function embedChunk (text) {
     return response.data[0].embedding
 }
 
-// const { QdrantClient } = require("@qdrant/js-client-rest");
-
-// const client = new QdrantClient({ url: "http://localhost:6333" });
-
-// async function uploadEmbedding(id, vector, payload) {
-//   await client.upsert("emails", {
-//     points: [
-//       {
-//         id,
-//         vector,
-//         payload // { subject: ..., date: ..., etc. }
-//       }
-//     ]
-//   });
-// }
-
 async function indexSentence (collectionName, sentence, embedding, emailId, username) {
-    // const pointId = `${username}-${emailId}-${Math.random().toString(36).slice(2, 11)}`
-    const pointId = Math.floor(Math.random() * 900000) + 1
-
-    console.dir('\n')
-    console.dir(qdrantClient)
-    console.dir('\n')
-
     await qdrantClient.upsert(collectionName, {
         wait: true,
         points: [
             {
-                id: pointId,
                 vector: embedding,
                 payload: {
                     emailId,
@@ -81,11 +57,10 @@ async function indexSentence (collectionName, sentence, embedding, emailId, user
             }
         ]
     })
-    console.log(`Indexed sentence in Qdrant with ID ${pointId}.`)
 }
 
 function chunkText (text) {
-    const sentences = text.match(/[^\.!\?]+[\.!\?]+/g) || [text]
+    const sentences = text.match(/[^.!?]+[.!?]+/g) || [text]
 
     const chunks = []
     let currentChunk = ''
