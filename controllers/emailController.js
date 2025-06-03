@@ -3,11 +3,12 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 import Email from '../models/Email.js'
 import User from '../models/User.js'
+import { saveVectorEmail } from '../models/VectorEmail.js'
 dotenv.config()
 
 export async function save (req, res) {
     try {
-        const { n8nKey, to, id, threadId, subject, from, compressed } = req.body
+        const { n8nKey, to, id, threadId, subject, from, compressed, cleaned } = req.body
 
         if (!n8nKey || n8nKey !== process.env.N8N_KEY) {
             return res.status(401).json({ message: 'Clave de n8n inválida' })
@@ -52,6 +53,7 @@ export async function save (req, res) {
         })
 
         await email.save()
+        await saveVectorEmail(cleaned)
         return res.status(201).json({ message: 'OK' })
     } catch (err) {
         console.error(err)
