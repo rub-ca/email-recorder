@@ -64,6 +64,8 @@ html {
   color: initial;
   font: initial;
   background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
 }
 
 .email-content {

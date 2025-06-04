@@ -52,6 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    addMessage ("qe")
+    addMessage ("qew")
+    addMessage ("qewe")
     // Reload refresh token
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
@@ -125,4 +128,17 @@ async function onClickSendMessage() {
     } catch (error) {
         console.error('Error al enviar el correo:', error);
     }
+}
+
+function addMessage(text) {
+  const messagesContainer = document.getElementById('chat-content');
+
+  const messageDiv = document.createElement('div');
+  messageDiv.classList.add('message'); // Puedes definir estilos para esta clase
+  messageDiv.textContent = text;
+
+  messagesContainer.appendChild(messageDiv);
+
+  // Hacer scroll automático al último mensaje
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
