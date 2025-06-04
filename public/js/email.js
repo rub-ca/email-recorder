@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
+    // Reload refresh token
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
             method: 'POST',
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     fetch('https://recorder.fuelmates.com/api/email/all', {
         method: 'GET',
-        credentials: 'include' // 👈 NECESARIO para enviar cookies
+        credentials: 'include' 
     })
         .then(res => {
             return res.json()
@@ -108,7 +109,6 @@ async function onClickSendMessage() {
         console.dir("\n")
         console.dir(EMAILS)
 
-        // Limpiar el input
         input.value = '';
     } catch (error) {
         console.error('Error al enviar el correo:', error);
