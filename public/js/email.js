@@ -106,6 +106,11 @@ async function onClickSendMessage() {
         }
 
         const data = await response.json();
+        const idEmailResponse = data.result[0].payload.emailId;
+
+        const divEmail = document.getElementById(idEmailResponse);
+        divEmail.click()
+
         console.log('Correo enviado:', data);
 
 
