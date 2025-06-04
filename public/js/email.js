@@ -44,36 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const sendButton = document.getElementById('send-button');
 
-    sendButton.addEventListener('click', async () => {
-        const input = document.getElementById('textareames');
-        const emailContent = input.value.trim();
-
-        if (!emailContent) {
-            alert('Por favor, ingresa un correo electrónico.');
-            return;
-        }
-
-        try {
-            const response = await fetch('https://recorder.fuelmates.com/api/talk/message', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'include',
-                body: JSON.stringify({ message: emailContent })
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al enviar el correo');
-            }
-
-            const data = await response.json();
-            console.log('Correo enviado:', data);
-
-            // Limpiar el input
-            input.value = '';
-        } catch (error) {
-            console.error('Error al enviar el correo:', error);
-        }
-    })
+    sendButton.addEventListener('click', onClickSendMessage)
 
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
@@ -104,3 +75,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         })
         .catch(err => console.error('Error:', err))
 });
+
+
+async function onClickSendMessage() {
+    const input = document.getElementById('textareames');
+    const emailContent = input.value.trim();
+
+    if (!emailContent) return;
+
+    try {
+        const response = await fetch('https://recorder.fuelmates.com/api/talk/message', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ message: emailContent })
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al enviar el correo');
+        }
+
+        const data = await response.json();
+        console.log('Correo enviado:', data);
+
+        console.dir("\n")
+        console.dir("\n")
+        console.dir(EMAILS)
+
+        // Limpiar el input
+        input.value = '';
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+    }
+}
