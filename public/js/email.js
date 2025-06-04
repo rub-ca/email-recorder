@@ -41,10 +41,16 @@ function writeEmailDiv(email) {
 
 // on document load
 document.addEventListener('DOMContentLoaded', async () => {
-
     const sendButton = document.getElementById('send-button');
-
     sendButton.addEventListener('click', onClickSendMessage)
+
+    const textarea = document.getElementById('textarea-message');
+    textarea.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            onClickSendMessage();
+        }
+    });
 
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
@@ -78,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 async function onClickSendMessage() {
-    const input = document.getElementById('textareames');
+    const input = document.getElementById('textarea-message');
     const emailContent = input.value.trim();
 
     if (!emailContent) return;
