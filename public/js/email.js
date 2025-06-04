@@ -26,7 +26,7 @@ function writeEmailDiv(email) {
 
             const decompressed = await response.json(); // Recibe texto plano descomprimido
 
-            const chatContent = document.getElementById('chat-content');
+            const chatContent = document.getElementById('email-content');
 
             chatContent.innerHTML = `${decompressed.compressed}`;
 
