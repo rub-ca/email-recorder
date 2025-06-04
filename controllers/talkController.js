@@ -26,10 +26,9 @@ export async function message (req, res) {
 
         const embedding = embeddingResponse.data[0].embedding
 
-        // 2. Buscar los 3 textos más relevantes en Qdrant
         const result = await qdrantClient.search('emails', {
             vector: embedding,
-            limit: 3,
+            limit: 1,
             with_payload: true
         })
 
@@ -40,7 +39,7 @@ export async function message (req, res) {
         }
 
         // 3. Armar el contexto para el modelo
-        const contextText = contexts.map((text, i) => `Correo ${i + 1}:\n${text}`).join('\n\n')
+        const contextText = contexts.map((text, i) => `Correo :\n${text}`).join('\n\n')
 
         const systemPrompt = 'Tienes acceso a fragmentos de correos electrónicos. Usa esta información para responder de forma precisa la pregunta del usuario.'
 

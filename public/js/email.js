@@ -41,8 +41,42 @@ function writeEmailDiv(email) {
 
 // on document load
 document.addEventListener('DOMContentLoaded', async () => {
+
+    const sendButton = document.getElementById('send-button');
+
+    sendButton.addEventListener('click', async () => {
+        const input = document.getElementById('textareames');
+        const emailContent = input.value.trim();
+
+        if (!emailContent) {
+            alert('Por favor, ingresa un correo electrónico.');
+            return;
+        }
+
+        try {
+            const response = await fetch('https://recorder.fuelmates.com/api/talk/message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+                body: JSON.stringify({ message: emailContent })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al enviar el correo');
+            }
+
+            const data = await response.json();
+            console.log('Correo enviado:', data);
+
+            // Limpiar el input
+            input.value = '';
+        } catch (error) {
+            console.error('Error al enviar el correo:', error);
+        }
+    })
+
     try {
-        const response = await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
+        await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include'
