@@ -1,10 +1,15 @@
 import express from 'express'
-import dotenv from 'dotenv'
-import { connectDB } from './config/db.js'
-import authRoutes from './routes/authRoutes.js'
-import emailRoutes from './routes/emailRoutes.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+
+import dotenv from 'dotenv'
+
+import { connectDB } from './config/db.js'
+
+import authRoutes from './routes/authRoutes.js'
+import emailRoutes from './routes/emailRoutes.js'
+import talkRoutes from './routes/talkRoutes.js'
+
 import { logger } from './logs/logger.js'
 
 dotenv.config()
@@ -30,6 +35,7 @@ app.use(logger)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/email', emailRoutes)
+app.use('/api/talk', talkRoutes)
 
 app.use(express.static('public'))
 
