@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     fetch('https://recorder.fuelmates.com/api/email/all', {
         method: 'GET',
-        credentials: 'include' 
+        credentials: 'include'
     })
         .then(res => {
             return res.json()
@@ -90,6 +90,8 @@ async function onClickSendMessage() {
 
     if (!emailContent) return;
 
+    input.value = '';
+
     try {
         const response = await fetch('https://recorder.fuelmates.com/api/talk/message', {
             method: 'POST',
@@ -105,11 +107,15 @@ async function onClickSendMessage() {
         const data = await response.json();
         console.log('Correo enviado:', data);
 
-        console.dir("\n")
-        console.dir("\n")
-        console.dir(EMAILS)
 
-        input.value = '';
+        console.log('ww:', data.result[0].payload.emailId);
+        console.log('ww:', data.result[0].payload.emailId);
+        console.log('ww:', data.result[0].payload.emailId);
+        console.log('ww:', data.result[0].payload.emailId);
+
+        console.dir("\n")
+        console.dir("\n")
+        console.dir(EMAILS)        
     } catch (error) {
         console.error('Error al enviar el correo:', error);
     }

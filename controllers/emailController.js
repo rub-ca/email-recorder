@@ -62,7 +62,6 @@ export async function save (req, res) {
 }
 
 export async function getAll (req, res) {
-    console.log('Getting all emails for user')
     const token = req.cookies.accessToken
 
     if (!token) {
