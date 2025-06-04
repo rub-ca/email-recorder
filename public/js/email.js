@@ -4,6 +4,7 @@ function writeEmailDiv(email) {
     const chatList = document.getElementById('chat-list');
     const div = document.createElement('div');
     div.className = 'chat-item';
+    div.id = email.id
     div.innerHTML = `
         <div class="chat-item-header">
             <span class="chat-item-title">${email.subject || 'Sin asunto'}</span>
@@ -39,7 +40,6 @@ function writeEmailDiv(email) {
     chatList.appendChild(div);
 }
 
-// on document load
 document.addEventListener('DOMContentLoaded', async () => {
     const sendButton = document.getElementById('send-button');
     sendButton.addEventListener('click', onClickSendMessage)
@@ -76,7 +76,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 writeEmailDiv({
                     subject: email.subject,
                     from: email.from,
-                    compressed: email.compressed
+                    compressed: email.compressed,
+                    id: email.id,
                 });
             });
         })
@@ -115,7 +116,7 @@ async function onClickSendMessage() {
 
         console.dir("\n")
         console.dir("\n")
-        console.dir(EMAILS)        
+        console.dir(EMAILS)
     } catch (error) {
         console.error('Error al enviar el correo:', error);
     }
