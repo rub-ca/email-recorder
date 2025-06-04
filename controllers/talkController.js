@@ -58,7 +58,7 @@ export async function message (req, res) {
         const respuesta = chatResponse.choices[0].message.content
 
         // 5. Enviar respuesta al cliente
-        return res.status(200).json({ answer: respuesta })
+        return res.status(200).json({ answer: respuesta, contexts })
     } catch (error) {
         console.error('Error al procesar el mensaje:', error)
         return res.status(500).json({ error: 'Error al procesar el mensaje' })
