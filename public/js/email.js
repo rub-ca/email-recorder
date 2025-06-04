@@ -52,8 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    addMessage('Hola, ¿en qué puedo ayudarte?', 'bot');
-    addMessage('Quiero enviar un correo', 'user');
     // Reload refresh token
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
