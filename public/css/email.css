@@ -68,6 +68,18 @@ html {
   flex-direction: column;
 }
 
+.chat-content .user {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.chat-content .bot {
+  background-color: #ffffff;
+  align-self: flex-start;
+  text-align: left;
+}
+
 .email-content {
   flex: 1 1 0;
   min-width: 0;

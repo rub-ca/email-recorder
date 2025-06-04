@@ -52,9 +52,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    addMessage ("qe")
-    addMessage ("qew")
-    addMessage ("qewe")
+    addMessage('Hola, ¿en qué puedo ayudarte?', 'bot');
+    addMessage('Quiero enviar un correo', 'user');
     // Reload refresh token
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
@@ -94,6 +93,7 @@ async function onClickSendMessage() {
 
     if (!emailContent) return;
 
+    addMessage(input.value, 'user');
     input.value = '';
 
     try {
@@ -114,6 +114,7 @@ async function onClickSendMessage() {
         const divEmail = document.getElementById(idEmailResponse);
         divEmail.click()
 
+        addMessage(response.answer, 'bot');
         console.log('Correo enviado:', data);
 
 
@@ -129,16 +130,15 @@ async function onClickSendMessage() {
         console.error('Error al enviar el correo:', error);
     }
 }
+function addMessage(text, from = 'user') {
+    const messagesContainer = document.getElementById('chat-content'); // importante usar el contenedor de mensajes
 
-function addMessage(text) {
-  const messagesContainer = document.getElementById('chat-content');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', from); // clase: 'message user' o 'message bot'
+    messageDiv.textContent = text;
 
-  const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message'); // Puedes definir estilos para esta clase
-  messageDiv.textContent = text;
+    messagesContainer.appendChild(messageDiv);
 
-  messagesContainer.appendChild(messageDiv);
-
-  // Hacer scroll automático al último mensaje
-  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // Scroll automático al último mensaje
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
