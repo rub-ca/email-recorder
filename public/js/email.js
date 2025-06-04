@@ -114,7 +114,7 @@ async function onClickSendMessage() {
         const divEmail = document.getElementById(idEmailResponse);
         divEmail.click()
 
-        addMessage(response.answer, 'bot');
+        addMessage(data.answer, 'bot');
         console.log('Correo enviado:', data);
 
 
