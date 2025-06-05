@@ -1,4 +1,5 @@
 var EMAILS = [];
+var USERNAME = '';
 
 function writeEmailDiv(email) {
     const chatList = document.getElementById('email-list');
@@ -117,7 +118,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     }).then(res => {
         return res.json()
     }).then(data => {
-        console.log('Username refresh:', data.username);
+        USERNAME = data.username || '';
+        document.getElementById('modal-title-name').textContent = USERNAME
     }).catch(err => console.error('Error:', err))
 
     fetch('https://recorder.fuelmates.com/api/email/all', {
