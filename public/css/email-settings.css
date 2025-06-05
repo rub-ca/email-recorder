@@ -60,3 +60,86 @@
 .close-modal:hover {
   background-color: var(--color-send-btn-hover);
 }
+
+.email-list-section {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.email-list {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.email-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  margin-bottom: 8px;
+  background-color: var(--color-textarea-bg);
+  color: var(--color-text);
+}
+
+.email-list button {
+  background-color: var(--color-send-btn);
+  color: var(--color-text);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.email-list button:hover {
+  background-color: var(--color-send-btn-hover);
+}
+
+.email-input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.email-input-group input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+  background-color: var(--color-textarea-bg);
+  color: var(--color-text);
+}
+
+.email-input-group button {
+  padding: 8px 12px;
+  background-color: var(--color-send-btn);
+  color: var(--color-text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.email-input-group button:hover {
+  background-color: var(--color-send-btn-hover);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.logout-button {
+  background-color: crimson;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: darkred;
+}

@@ -52,14 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    document.getElementById('settings-button').addEventListener('click', () => {
-        document.getElementById('modal-overlay').style.display = 'flex';
-    });
-
-    document.getElementById('close-modal').addEventListener('click', () => {
-        document.getElementById('modal-overlay').style.display = 'none';
-    });
-
     // Reload refresh token
     try {
         await fetch('https://recorder.fuelmates.com/api/auth/refresh', {

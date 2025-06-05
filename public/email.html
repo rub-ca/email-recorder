@@ -26,10 +26,25 @@
       <div class="modal-overlay" id="modal-overlay">
         <div class="modal">
           <h2>Configuración</h2>
-          <p>Aquí puedes ajustar tus preferencias.</p>
-          <button class="close-modal" id="close-modal">Cerrar</button>
+
+          <div class="email-list-section">
+            <h3>Emails autorizados</h3>
+            <ul id="authorized-emails" class="email-list">
+              <!-- Correos se llenarán dinámicamente -->
+            </ul>
+            <div class="email-input-group">
+              <input type="email" id="new-email" placeholder="Agregar nuevo email" />
+              <button id="add-email">Añadir</button>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="logout-button" id="logout-button">Logout</button>
+            <button class="close-modal" id="close-modal">Cerrar</button>
+          </div>
         </div>
       </div>
+
 
 
       <div class="content-split">
@@ -46,6 +61,7 @@
   </div>
 
   <script src="./js/email.js"></script>
+  <script src="./js/email-settings.js"></script>
 </body>
 
 </html>

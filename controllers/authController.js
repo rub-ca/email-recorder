@@ -101,3 +101,24 @@ export async function refreshToken (req, res) {
         res.status(401).json({ message: 'Refresh token no válido o expirado' })
     }
 }
+
+export async function logout (req, res) {
+    try {
+        res
+            .clearCookie('accessToken', {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None'
+            })
+            .clearCookie('refreshToken', {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'None'
+            })
+            .status(200)
+            .json({ message: 'Logout exitoso' })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: 'Error al cerrar sesión' })
+    }
+}
