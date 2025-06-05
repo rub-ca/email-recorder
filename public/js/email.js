@@ -28,9 +28,7 @@ function writeEmailDiv(email) {
 
             const decompressed = await response.json();
 
-            const chatContent = document.getElementById('email-content');
-
-            chatContent.innerHTML = `${decompressed.compressed}`;
+            document.getElementById('email-content').innerHTML = `${decompressed.compressed}`;
         } catch (error) {
             console.error('Error al descomprimir:', error);
         }

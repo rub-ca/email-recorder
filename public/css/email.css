@@ -130,3 +130,7 @@ html {
 .send-button:hover {
   background-color: var(--color-send-btn-hover);
 }
+
+.chat-item-header{
+  margin: 20px;
+}
