@@ -123,4 +123,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
     }).catch(err => console.error('Error:', err))
+
+    fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    }).then(res => {
+        return res.json()
+    }).then(data => {
+        console.dir("da" + data)
+        console.dir("da" + data)
+        console.dir("da" + data)
+    }).catch(err => console.error('Error:', err))
 });

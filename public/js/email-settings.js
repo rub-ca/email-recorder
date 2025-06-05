@@ -30,7 +30,7 @@ logoutBtn.addEventListener('click', async () => {
     window.location.href = '/';
 });
 
-// Añadir email
+// Add email
 addEmailBtn.addEventListener('click', () => {
     const email = newEmailInput.value.trim();
     if (email && !authorizedEmails.includes(email)) {
@@ -40,7 +40,7 @@ addEmailBtn.addEventListener('click', () => {
     }
 });
 
-// Eliminar email
+// Remove email
 function removeEmail(email) {
     authorizedEmails = authorizedEmails.filter(e => e !== email);
     renderEmailList();

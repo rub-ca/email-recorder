@@ -122,3 +122,25 @@ export async function logout (req, res) {
         res.status(500).json({ message: 'Error al cerrar sesión' })
     }
 }
+
+export async function getAllowed (req, res) {
+    try {
+        const token = req.cookies?.accessToken
+
+        if (!token) {
+            return res.status(401).json({ message: 'Access token requerido' })
+        }
+
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        const user = await User.findById(payload.userId)
+
+        if (!user) {
+            return res.status(403).json({ message: 'Usuario no encontrado' })
+        }
+
+        res.status(200).json({ emailsAllowed: user.emailsAllowed })
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ message: 'Error al obtener emails permitidos' })
+    }
+}
