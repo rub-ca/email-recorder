@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }).then(res => {
         return res.json()
     }).then(data => {
-        console.log('Username refresh:', data);
+        console.log('Username refresh:', data.username);
     }).catch(err => console.error('Error:', err))
 
     fetch('https://recorder.fuelmates.com/api/email/all', {

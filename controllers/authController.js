@@ -95,7 +95,7 @@ export async function refreshToken (req, res) {
                 maxAge: 15 * 60 * 1000 // 15 minutos
             })
             .status(200)
-            .json({ message: user.username })
+            .json({ username: user.username })
     } catch (err) {
         console.error(err)
         res.status(401).json({ message: 'Refresh token no válido o expirado' })
