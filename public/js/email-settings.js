@@ -22,13 +22,12 @@ closeModal.addEventListener('click', () => {
 
 // Logout
 logoutBtn.addEventListener('click', async () => {
-    alert('Cerrando sesión...');
-    // Aquí podrías hacer: window.location.href = '/logout';
     await fetch('https://recorder.fuelmates.com/api/auth/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
     })
+    window.location.href = '/login';
 });
 
 // Añadir email
