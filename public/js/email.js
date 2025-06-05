@@ -131,8 +131,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }).then(res => {
         return res.json()
     }).then(data => {
-        console.dir("da" + data)
-        console.dir("da" + data)
-        console.dir("da" + data)
+        console.dir("da" + data.emailsAllowed)
+        console.dir("da" + data.emailsAllowed)
     }).catch(err => console.error('Error:', err))
 });
