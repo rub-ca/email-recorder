@@ -27,7 +27,7 @@ logoutBtn.addEventListener('click', async () => {
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
     })
-    window.location.href = '/login';
+    window.location.href = '/';
 });
 
 // Añadir email
