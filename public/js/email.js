@@ -1,7 +1,7 @@
 var EMAILS = [];
 
 function writeEmailDiv(email) {
-    const chatList = document.getElementById('chat-list');
+    const chatList = document.getElementById('email-list');
     const div = document.createElement('div');
     div.className = 'chat-item';
     div.id = email.id
@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             event.preventDefault();
             onClickSendMessage();
         }
+    });
+
+    document.getElementById('settings-button').addEventListener('click', () => {
+        document.getElementById('modal-overlay').style.display = 'flex';
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+        document.getElementById('modal-overlay').style.display = 'none';
     });
 
     // Reload refresh token
