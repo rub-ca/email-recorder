@@ -40,50 +40,6 @@ function writeEmailDiv(email) {
     chatList.appendChild(div);
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const sendButton = document.getElementById('send-button');
-    sendButton.addEventListener('click', onClickSendMessage)
-
-    const textarea = document.getElementById('textarea-message');
-    textarea.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter' && !event.shiftKey) {
-            event.preventDefault();
-            onClickSendMessage();
-        }
-    });
-
-    // Reload refresh token
-    try {
-        await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include'
-        })
-    } catch (err) {
-        console.log('Error: ' + err.message)
-    }
-
-    fetch('https://recorder.fuelmates.com/api/email/all', {
-        method: 'GET',
-        credentials: 'include'
-    })
-        .then(res => {
-            return res.json()
-        })
-        .then(data => {
-            EMAILS = data.emails || [];
-            EMAILS.forEach(email => {
-                writeEmailDiv({
-                    subject: email.subject,
-                    from: email.from,
-                    compressed: email.compressed,
-                    id: email.id,
-                });
-            });
-        })
-        .catch(err => console.error('Error:', err))
-});
-
 
 async function onClickSendMessage() {
     const input = document.getElementById('textarea-message');
@@ -128,6 +84,7 @@ async function onClickSendMessage() {
         console.error('Error al enviar el correo:', error);
     }
 }
+
 function addMessage(text, from = 'user') {
     const messagesContainer = document.getElementById('chat-content'); // importante usar el contenedor de mensajes
 
@@ -140,3 +97,49 @@ function addMessage(text, from = 'user') {
     // Scroll automático al último mensaje
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const sendButton = document.getElementById('send-button');
+    sendButton.addEventListener('click', onClickSendMessage)
+
+    const textarea = document.getElementById('textarea-message');
+    textarea.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            onClickSendMessage();
+        }
+    });
+
+    // Reload refresh token
+    try {
+        const usernameRefresh = await fetch('https://recorder.fuelmates.com/api/auth/refresh', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include'
+        })
+
+        console.log('Username refresh:', usernameRefresh);
+    } catch (err) {
+        console.log('Error: ' + err.message)
+    }
+
+    fetch('https://recorder.fuelmates.com/api/email/all', {
+        method: 'GET',
+        credentials: 'include'
+    })
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            EMAILS = data.emails || [];
+            EMAILS.forEach(email => {
+                writeEmailDiv({
+                    subject: email.subject,
+                    from: email.from,
+                    compressed: email.compressed,
+                    id: email.id,
+                });
+            });
+        })
+        .catch(err => console.error('Error:', err))
+});
