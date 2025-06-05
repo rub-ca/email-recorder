@@ -31,8 +31,6 @@ function writeEmailDiv(email) {
             const chatContent = document.getElementById('email-content');
 
             chatContent.innerHTML = `${decompressed.compressed}`;
-
-            console.log('Contenido descomprimido:', decompressed);
         } catch (error) {
             console.error('Error al descomprimir:', error);
         }
@@ -70,17 +68,6 @@ async function onClickSendMessage() {
         divEmail.click()
 
         addMessage(data.answer, 'bot');
-        console.log('Correo enviado:', data);
-
-
-        console.log('ww:', data.result[0].payload.emailId);
-        console.log('ww:', data.result[0].payload.emailId);
-        console.log('ww:', data.result[0].payload.emailId);
-        console.log('ww:', data.result[0].payload.emailId);
-
-        console.dir("\n")
-        console.dir("\n")
-        console.dir(EMAILS)
     } catch (error) {
         console.error('Error al enviar el correo:', error);
     }
