@@ -31,18 +31,30 @@ logoutBtn.addEventListener('click', async () => {
 });
 
 // Add email
-addEmailBtn.addEventListener('click', () => {
+addEmailBtn.addEventListener('click', async () => {
     const email = newEmailInput.value.trim();
     if (email && !authorizedEmails.includes(email)) {
-        authorizedEmails.push(email);
+        const payload = { email };
+        await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            credentials: 'include'
+        })
         newEmailInput.value = '';
         renderEmailList();
     }
 });
 
 // Remove email
-function removeEmail(email) {
-    authorizedEmails = authorizedEmails.filter(e => e !== email);
+async function removeEmail(email) {
+    const payload = { email };
+    await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        credentials: 'include'
+    })
     renderEmailList();
 }
 
