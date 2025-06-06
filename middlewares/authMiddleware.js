@@ -10,16 +10,12 @@ export async function authMiddleware (req, res, next) {
     try {
         const token = req.cookies?.accessToken
 
-        if (!token) {
-            return res.status(401).json({ message: 'Access token requerido' })
-        }
+        if (!token) return res.status(401).json({ message: 'Access token requerido' })
 
         const payload = jwt.verify(token, process.env.JWT_SECRET)
         const user = await User.findById(payload.userId)
 
-        if (!user) {
-            return res.status(403).json({ message: 'Usuario no encontrado' })
-        }
+        if (!user) return res.status(403).json({ message: 'Usuario no encontrado' })
 
         req.user = user
         next()

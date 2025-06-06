@@ -16,9 +16,8 @@ export async function postAllowed (req, res) {
         const user = req.user
 
         const { email } = req.body
-        if (!email || !email.includes('@')) {
-            return res.status(400).json({ message: 'Email inválido' })
-        }
+
+        if (!email || !email.includes('@')) return res.status(400).json({ message: 'Email inválido' })
 
         // Add email to allowed list if not already present
         if (!user.emailsAllowed.includes(email)) {
@@ -38,9 +37,8 @@ export async function deleteAllowed (req, res) {
         const user = req.user
 
         const { email } = req.body
-        if (!email) {
-            return res.status(400).json({ message: 'Email inválido' })
-        }
+
+        if (!email) return res.status(400).json({ message: 'Email inválido' })
 
         // Remove email from allowed list if present
         user.emailsAllowed = user.emailsAllowed.filter(e => e !== email)
