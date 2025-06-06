@@ -1,4 +1,3 @@
-import User from '../models/User.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -15,7 +14,6 @@ export async function getAllowed (req, res) {
 export async function postAllowed (req, res) {
     try {
         const user = req.user
-        // const user = await User.findById(req.user.id)
 
         const { email } = req.body
         if (!email || !email.includes('@')) {
@@ -38,7 +36,6 @@ export async function postAllowed (req, res) {
 export async function deleteAllowed (req, res) {
     try {
         const user = req.user
-        // const user = await User.findById(req.user.id)
 
         const { email } = req.body
         if (!email) {
