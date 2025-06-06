@@ -79,10 +79,15 @@ html {
 }
 
 /* Resetea los estilos de todos los elementos dentro de chat-content */
-.chat-content * {
+.chat-content *,
+.email-content * {
   all: unset;
   display: revert;
   box-sizing: border-box;
+}
+
+.email-content * {
+  color: black;
 }
 
 .email-content {
@@ -131,6 +136,6 @@ html {
   background-color: var(--color-send-btn-hover);
 }
 
-.chat-item-header{
+.chat-item-header {
   margin: 20px;
 }
