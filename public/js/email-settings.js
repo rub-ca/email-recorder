@@ -35,7 +35,7 @@ addEmailBtn.addEventListener('click', async () => {
     const email = newEmailInput.value.trim();
     if (email && !authorizedEmails.includes(email)) {
         const payload = { email };
-        await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+        await fetch('https://recorder.fuelmates.com/api/allowed', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -49,7 +49,7 @@ addEmailBtn.addEventListener('click', async () => {
 // Remove email
 async function removeEmail(email) {
     const payload = { email };
-    await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+    await fetch('https://recorder.fuelmates.com/api/allowed', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -76,7 +76,7 @@ async function renderEmailList() {
 }
 
 async function updateEmailsAllowed() {
-    await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+    await fetch('https://recorder.fuelmates.com/api/allowed', {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'

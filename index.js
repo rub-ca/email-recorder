@@ -9,6 +9,7 @@ import { connectDB } from './config/db.js'
 import authRoutes from './routes/authRoutes.js'
 import emailRoutes from './routes/emailRoutes.js'
 import talkRoutes from './routes/talkRoutes.js'
+import allowedRoutes from './routes/allowedRoutes.js'
 
 import { logger } from './logs/logger.js'
 
@@ -36,6 +37,7 @@ app.use(logger)
 app.use('/api/auth', authRoutes)
 app.use('/api/email', emailRoutes)
 app.use('/api/talk', talkRoutes)
+app.use('/api/allowed', allowedRoutes)
 
 app.use(express.static('public'))
 
