@@ -49,7 +49,7 @@ export async function message (req, res) {
                     {
                         key: 'username',
                         match: {
-                            value: user
+                            value: user.username
                         }
                     }
                 ]
