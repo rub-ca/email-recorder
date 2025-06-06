@@ -3,6 +3,11 @@ import User from '../models/User.js'
 
 export async function authMiddleware (req, res, next) {
     try {
+        const { n8nKey } = req.body
+        if (n8nKey && n8nKey === process.env.N8N_KEY) {
+            return next()
+        }
+
         const token = req.cookies?.accessToken
 
         if (!token) {
