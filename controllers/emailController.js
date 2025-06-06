@@ -17,7 +17,6 @@ export async function save (req, res) {
         const username = to
         const user = await User.findOne({ username })
 
-        // Check is username exists:
         if (!user) {
             return res.status(400).json({ message: 'User not found' })
         }
