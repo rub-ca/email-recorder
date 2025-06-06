@@ -1,8 +1,6 @@
 import dotenv from 'dotenv'
 import { QdrantClient } from '@qdrant/js-client-rest'
 import OpenAI from 'openai'
-import jwt from 'jsonwebtoken'
-import User from '../models/User.js'
 
 dotenv.config()
 
@@ -17,22 +15,9 @@ const qdrantClient = new QdrantClient({
 
 export async function message (req, res) {
     try {
-        const token = req.cookies?.accessToken
-
-        if (!token) {
-            return res.status(401).json({ message: 'Access token requerido' })
-        }
-
-        const payload = jwt.verify(token, process.env.JWT_SECRET)
-        const user = await User.findById(payload.userId)
-
-        if (!user) {
-            return res.status(403).json({ message: 'Usuario no encontrado' })
-        }
         const { message } = req.body
         if (!message) return res.status(400).json({ error: 'Falta el campo message' })
 
-        // 1. Obtener embedding de la pregunta
         const embeddingResponse = await openai.embeddings.create({
             model: 'text-embedding-3-small',
             input: message
@@ -49,7 +34,7 @@ export async function message (req, res) {
                     {
                         key: 'username',
                         match: {
-                            value: user.username
+                            value: req.user.username
                         }
                     }
                 ]
