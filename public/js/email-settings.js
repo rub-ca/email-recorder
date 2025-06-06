@@ -59,7 +59,8 @@ async function removeEmail(email) {
 }
 
 // Renderizar la lista
-function renderEmailList() {
+async function renderEmailList() {
+    await updateEmailsAllowed();
     emailList.innerHTML = '';
     authorizedEmails.forEach(email => {
         const li = document.createElement('li');
@@ -74,18 +75,19 @@ function renderEmailList() {
     });
 }
 
-fetch('https://recorder.fuelmates.com/api/auth/allowed', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include'
-}).then(res => {
-    return res.json()
-}).then(data => {
-    if (data.emailsAllowed) {
-        authorizedEmails = data.emailsAllowed;
-        renderEmailList();
-    }
-}).catch(err => console.error('Error:', err))
+async function updateEmailsAllowed() {
+    await fetch('https://recorder.fuelmates.com/api/auth/allowed', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    }).then(async res => {
+        return await res.json()
+    }).then(data => {
+        if (data.emailsAllowed) authorizedEmails = data.emailsAllowed;
+    }).catch(err => console.error('Error:', err))
+}
+
+renderEmailList();
 
 document.getElementById('settings-button').addEventListener('click', () => {
     document.getElementById('modal-overlay').style.display = 'flex';
